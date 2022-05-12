@@ -1,0 +1,22 @@
+# Run docker compose -f = file , -d = detach mode
+docker compose -f <compose-yaml file> up -d
+
+# Stop docker compose 
+docker compose -f compose-local.yaml down
+
+# list of all running container
+docker ps
+
+# if Ports are not available: listen tcp 0.0.0.0/50070: bind: An attempt was made to access a socket in a way forbidden by its access permissions
+net stop winnat
+net start winnat
+
+
+# space of docker container
+df -h
+
+# remove any stopped containers and all unused images 
+docker system prune -a
+
+# Check docker status
+sudo service docker status
