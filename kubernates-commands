@@ -1,0 +1,65 @@
+#General Commands
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+# get config of clusters in kubernates
+kubectl config get-contexts
+
+# switch conext 
+kubectl config use-context <cluster-name>
+
+# Kubernates create deployment file
+kubectl create deployment mysql --image=mysql:5.7 --dry-run=client -o=yaml > mysql-deployment.yml
+
+#Create POD
+kubectl apply -f mysql-deployment.yml
+
+# Kubernates create Service
+kubectl create service clusterip mysql --tcp=3306 --dry-run=client -o=yaml > mysql-service.yml
+kubectl apply -f mysql-service.yml
+
+# Delete POD,Services
+kubectl delete -f beer-service-deployment.yml
+
+# get nodes
+kubectl get nodes
+
+kubectl create deployment jms --image=vromero/activemq-artemis --dry-run=client -o=yaml > jms-deploymnet.yml
+kubectl apply -f jms-deployment.yml
+
+kubectl create service clusterip jms --tcp=8161:8161 --61616:61616 --dry-run=client -o=yaml > jms-service.yml
+kubectl apply -f jms-service.yml
+
+
+#get details about pod
+kubectl describe pod
+
+# get all pods,services
+kubectl get all
+
+# Basic Commands
+minikube status
+kubectl cluster-info
+kubectl version
+kubectl get nodes
+kubectl get services
+kubectl create deployment <deployment_name> --image=<image_name> [--dry-run] [options]
+kubectl get deployment
+kubectl get pod
+kubectl get replicaset
+kubectl edit deployment <deployment_name>
+kubectl logs <pod_name>
+kubectl describe pod <pod_name>
+kubectl exec -it <pod_name> --bin/bash
+kubectl delete deployment <deployment_name>
+kubectl create -f <configfile_name.yaml>
+kubectl apply -f <configfile_name.yaml>
+kubectl delete -f <configfile_name.yaml>
+kubectl describe service <service_name>
+kubectl get pod -o wide
+kubectl get deployment <deployment_name> -o yaml > <fileName.yaml>
+kubectl get all
+kubectl create namespace <namespace_object>
+kubectl get namespace
+
+#IMP - find Target port and forwarded port to access NodePort IP:PORT outside cluster
+minikube service --all
