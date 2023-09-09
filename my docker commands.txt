@@ -1,0 +1,53 @@
+docker --version
+docker run in28min/todo-rest-api-h2:1.0.0 RELEASE
+docker run -p 5000:5000 in28min/todo-rest-api-h2:1.0.0 RELEASE			Here if we do ctrl + c then the application will be killed
+	  hostport  containerport
+docker run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0 RELEASE		Here if we do ctrl + c then the application will not be killed means the application will be running in the background
+			detech
+			
+docker logs [conatiner id]
+docker logs -f [container id]							it will start tailing the logs
+docker container ls								to see what are the conatiners are running
+docker images
+docker conatiner ls -a								To show all the conatiners which are running and which are nor running
+docker container stop [container id]						This command gracefully shut down the application after this command the container takes little time to shut application down geacefully
+docker tag [current image]:[current tag] [new image]:[new tag]     for example -> sudo docker tag indiride_api-gateway:latest indiride_api-gateway:app1
+docker pull mysql
+docker search mysql
+docker image history [image id] or [image name]:[tag]
+docker image inspect [image id]
+docker image remove [image id]
+docker conatiner pause [conatiner id]
+docker conatiner unpause [container id]
+docker container inspect [container id]
+docker container ls -a
+docker container prune 								this will remove all the stopped containers
+docker container
+docker run -p 5000:5000 -d --restart=always [repository name]:[tage name] 	--restart has two most famous values -> "always", "no" and the default value id "no"
+			     [restart policy]					it means when we stop the container and then we restart the docker desktop then the container with value "always" starts running
+			    
+docker events									This command will give you all the logs related to what happening in the docker
+docker top [Container id]							What is the top process which is running in the specific container
+docker stats									This will show all the stats regrading the containers which are running
+docker run -p 5000:5000 -m 512m --cpu-quota 5000 -d [image name]:[image tag]
+			memory limit	    100000=100%, 5000=5% cpu consumption
+			
+docker system df								This command is for to see what are the different thigs docker managing
+docker run -dit openjdk:8-jdk-alpine
+sudo docker cp target/docker-in-5-steps-todo-rest-api-h2-1.0.0.RELEASE.jar 1d974b8753350f36bd15174c4866d09abdbd5215618b6a5cba6d2dda1adfe20d:/tmp	to copy any jar in this container
+sudo docker container exec [container name] ls /tmp				List all the images which are present in the tmp folder of container-focused_wing
+sudo docker container commit [container name] in28min/manual-todo-rest-api:v1	to make the image of jar file which is present in the tmp folder of the container
+sudo docker container commit --change='CMD ["java","-jar","docker-in-5-steps-todo-rest-api-h2-1.0.0.RELEASE.jar"]' [container name] in28min/manual-todo-rest-api:v1
+																    [Repository name]:[tag name]
+																   
+sudo docker build -t [jar file name] .						In the end "." is mandetory
+docker login 									To login to dockerhub
+sudo docker tag spring-boot-docker.jar:latest akashmohite700/spring-boot-docker.jar
+sudo docker push akashmohite700/spring-boot-docker.jar
+sudo docker pull akashmohite700/spring-boot-docker.jar
+sudo docker pull mongo:latest
+sudo docker run -d -p 27017:27017 --name javatechiemongodb mongo:latest
+docker rm -f $(docker ps -a -q)
+----------------------------------------Manual link between two applications	---------------------------------------------------
+sudo docker run -p 8080:8080 --name springboot-mongodb --link javatechiemongodb:mongo -d spring-boot-mongodb-docker:1.0
+				    [Conatiner name]           [Mongo db container name]:[image name]	[Repository name]:[tag name]
